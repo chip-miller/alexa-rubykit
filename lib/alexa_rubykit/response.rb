@@ -39,6 +39,10 @@ module AlexaRubykit
       }
     end
 
+    def add_audio_stop
+      @directives << { 'type' => 'AudioPlayer.Stop' }
+    end
+
     def add_reprompt(speech_text, ssml = false)
       if ssml
         @reprompt = { "outputSpeech" => { :type => 'SSML', :ssml => check_ssml(speech_text) } }

@@ -123,4 +123,12 @@ describe 'Builds appropriate response objects' do
     expect(response_json).to eq(sample_json)
   end
 
+  it 'should create a valid response with an AudioPlayer.Stop directive' do
+    response = AlexaRubykit::Response.new
+    response.add_audio_stop
+    response.build_response_object
+    response_json = response.build_response
+    sample_json = JSON.parse(File.read('fixtures/response-sessionAudioStop.json')).to_json
+    expect(response_json).to eq(sample_json)
+  end
 end
