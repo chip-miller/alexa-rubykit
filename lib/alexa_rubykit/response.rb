@@ -24,8 +24,8 @@ module AlexaRubykit
       end
       @speech
     end
-    
-    def add_audio_url(url, token='', offset=0)
+
+    def add_audio_url(url, token='', offset=0, options={})
       @directives << {
         'type' => 'AudioPlayer.Play',
         'playBehavior' => 'REPLACE_ALL',
@@ -36,11 +36,20 @@ module AlexaRubykit
             'offsetInMilliseconds' => offset
           }
         }
-      }
+      }.merge(options)
     end
 
-    def add_audio_stop
-      @directives << { 'type' => 'AudioPlayer.Stop' }
+    def add_audio_stop(options={})
+      @directives << {
+        'type' => 'AudioPlayer.Stop'
+      }.merge(options)
+    end
+
+    def add_audio_clear_queue(options={})
+      @directives << {
+        'type' => 'AudioPlayer.ClearQueue',
+        'clearBehavior' => 'CLEAR_ENQUEUED' #CLEAR_ALL
+      }.merge(options)
     end
 
     def add_reprompt(speech_text, ssml = false)
